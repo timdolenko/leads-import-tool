@@ -12,15 +12,15 @@ public struct CasperContact {
     public var numberOfReviews: String
 }
 
-public struct HubspotContact {
-    public struct Address {
+public struct HubspotContact: Hashable {
+    public struct Address: Hashable {
         public var streetAddress: String
         public var zipCode: String
         public var city: String
         public var country: String
     }
 
-    public struct Names {
+    public struct Names: Hashable {
         internal init(first: String, last: String, ceo2First: String = "", ceo2Last: String = "", ceo3First: String = "", ceo3Last: String = "") {
             self.first = first
             self.last = last
@@ -46,6 +46,7 @@ public struct HubspotContact {
     public var address: Address
     public var email: String
     public var numberOfReviews: String
+    public var sourceFile: String
 }
 
 public struct BaseIdentifiableContact {

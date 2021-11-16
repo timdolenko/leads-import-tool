@@ -10,31 +10,42 @@ public class CasperMapper {
     }
     
     public var names: HubspotContact.Names {
-        if contact.represantativeName.isEmpty { return .init(first: "", last: "") }
-        
         do {
             return try NameMapper().process(contact.represantativeName)
         } catch {
-            print("❌ Failed to parse name: \(contact.represantativeName)")
-            return HubspotContact.Names(first: "FAILURE", last: contact.represantativeName)
+            return HubspotContact.Names(first: contact.represantativeName, last: "")
         }
     }
 
     public var address: HubspotContact.Address {
-        AddressMapper().map(address: contact.address)
+        do {
+            return try AddressMapper().process(address: contact.address)
+        } catch {
+            return HubspotContact.Address(streetAddress: contact.address, zipCode: "", city: "", country: "")
+        }
     }
 
     public var toHubspot: HubspotContact {
         
         return HubspotContact(
-            phone: contact.phone,
-            sellerPage: contact.sellerPage,
-            storeName: contact.storeName,
-            businessName: contact.businessName,
+            phone: contact.phone.trimmed,
+            sellerPage: contact.sellerPage.trimmed,
+            storeName: contact.storeName.trimmed,
+            businessName: contact.businessName.trimmed,
             ceoNames: names,
             address: address,
-            email: contact.email,
-            numberOfReviews: contact.numberOfReviews
+            email: contact.email.trimmed,
+            numberOfReviews: contact.numberOfReviews.onlyNumberic,
+            sourceFile: "Casper-Pack"
         )
+    }
+}
+
+extension String {
+    var trimmed: Self {
+        trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    var onlyNumberic: Self {
+        filter("0123456789".contains)
     }
 }

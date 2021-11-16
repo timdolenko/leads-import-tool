@@ -5,8 +5,8 @@ import XCTest
 class AddressMapperTests: XCTestCase {
     
     func testSimpleAddress() {
-        let a = AddressMapper()
-            .map(address: "Ludwigstr. 43|Nidda|63667|DE")
+        let a = try! AddressMapper()
+            .process(address: "Ludwigstr. 43|Nidda|63667|DE")
         
         XCTAssertEqual(a.streetAddress, "Ludwigstr. 43")
         XCTAssertEqual(a.city, "Nidda")
@@ -15,8 +15,8 @@ class AddressMapperTests: XCTestCase {
     }
     
     func testSimpleAddress2() {
-        let a = AddressMapper()
-            .map(address: "Oskar- Jäger- Str. 141.1|Köln|NRW|50825|DE")
+        let a = try! AddressMapper()
+            .process(address: "Oskar- Jäger- Str. 141.1|Köln|NRW|50825|DE")
         
         XCTAssertEqual(a.streetAddress, "Oskar- Jäger- Str. 141.1")
         XCTAssertEqual(a.city, "Köln")
@@ -25,8 +25,8 @@ class AddressMapperTests: XCTestCase {
     }
     
     func testCompanyAddress1() {
-        let a = AddressMapper()
-            .map(address: "Dastro®|Hartenbergstr. 20|Königswinter|53639|DE")
+        let a = try! AddressMapper()
+            .process(address: "Dastro®|Hartenbergstr. 20|Königswinter|53639|DE")
         
         XCTAssertEqual(a.streetAddress, "Hartenbergstr. 20")
         XCTAssertEqual(a.city, "Königswinter")
@@ -35,8 +35,8 @@ class AddressMapperTests: XCTestCase {
     }
     
     func testHouseNumber() {
-        let a = AddressMapper()
-            .map(address: "Busbrookhöhe|67|Hamburg|22159|DE")
+        let a = try! AddressMapper()
+            .process(address: "Busbrookhöhe|67|Hamburg|22159|DE")
         
         XCTAssertEqual(a.streetAddress, "Busbrookhöhe 67")
         XCTAssertEqual(a.city, "Hamburg")
@@ -45,8 +45,8 @@ class AddressMapperTests: XCTestCase {
     }
     
     func testHouseNumberRegion() {
-        let a = AddressMapper()
-            .map(address: "Karlsplatz|4|Ludwigsburg|Baden-Württemberg|71638|DE")
+        let a = try! AddressMapper()
+            .process(address: "Karlsplatz|4|Ludwigsburg|Baden-Württemberg|71638|DE")
         
         XCTAssertEqual(a.streetAddress, "Karlsplatz 4")
         XCTAssertEqual(a.city, "Ludwigsburg")
