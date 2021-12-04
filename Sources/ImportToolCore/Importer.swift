@@ -50,13 +50,13 @@ extension Importer {
     public func writeHubpostContacts(_ contacts: [HubspotContact], to path: String) {
         var csv = ""
         
-        let header = "Lead-Quelle;Vorname;Nachname;GF2 Vorname;GF2 Nachname;GF3 Vorname;GF3 Nachname;Telefonnummer;E-Mail;Händlerseite URL;Account-Name (Amazon);Unternehmensname;Adresszeile;PLZ;Stadt;Land/Region;Anzahl der Händlerbewertungen;Source\n"
+        let header = "Lead-Quelle;Vorname;Nachname;GF2 Vorname;GF2 Nachname;GF3 Vorname;GF3 Nachname;Telefonnummer;E-Mail;Händlerseite URL;Account-Name (Amazon);Unternehmensname;Adresszeile;PLZ;Stadt;Land/Region;Anzahl der Händlerbewertungen;Anzahl der Produkte;Monatlicher Umsatz;Source\n"
         
         csv += header
         
         for c in contacts {
             
-            let row = "DMC;\(c.ceoNames.first);\(c.ceoNames.last);\(c.ceoNames.ceo2First);\(c.ceoNames.ceo2Last);\(c.ceoNames.ceo3First);\(c.ceoNames.ceo3Last);\(c.phone);\(c.email); \(c.sellerPage);\(c.storeName);\(c.businessName);\(c.address.streetAddress);\(c.address.zipCode);\(c.address.city);\(c.address.country);\(c.numberOfReviews);\(c.sourceFile)\n"
+            let row = "DMC;\(c.ceoNames.first);\(c.ceoNames.last);\(c.ceoNames.ceo2First);\(c.ceoNames.ceo2Last);\(c.ceoNames.ceo3First);\(c.ceoNames.ceo3Last);\(c.phone);\(c.email); \(c.sellerPage);\(c.storeName);\(c.businessName);\(c.address.streetAddress);\(c.address.zipCode);\(c.address.city);\(c.address.country);\(c.numberOfReviews);\(c.numberOfProducts);\(c.monthlyRevenue);\(c.sourceFile)\n"
             csv += row
         }
         

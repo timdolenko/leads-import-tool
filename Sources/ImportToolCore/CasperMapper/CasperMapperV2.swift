@@ -1,11 +1,11 @@
 import Foundation
 
 
-public class CasperMapper {
+public class CasperV2Mapper {
     
-    private let contact: CasperContact
+    private let contact: CasperContact_v2
     
-    public init(contact: CasperContact) {
+    public init(contact: CasperContact_v2) {
         self.contact = contact
     }
     
@@ -19,9 +19,9 @@ public class CasperMapper {
 
     public var address: HubspotContact.Address {
         do {
-            return try AddressMapper().process(address: contact.address, separator: "|")
+            return try AddressMapper().process(address: contact.businessAddress)
         } catch {
-            return HubspotContact.Address(streetAddress: contact.address, zipCode: "", city: "", country: "")
+            return HubspotContact.Address(streetAddress: contact.businessAddress, zipCode: "", city: "", country: "")
         }
     }
 
@@ -31,23 +31,16 @@ public class CasperMapper {
             phone: contact.phone.trimmed,
             sellerPage: contact.sellerPage.trimmed,
             storeName: contact.storeName.trimmed,
-            businessName: contact.businessName.trimmed,
+            businessName: contact.businessName
+                .trimmed
+                .replacingOccurrences(of: "&amp; ", with: "und"),
             ceoNames: names,
             address: address,
             email: contact.email.trimmed,
             numberOfReviews: contact.numberOfReviews.onlyNumberic,
-            numberOfProducts: "",
-            monthlyRevenue: "",
-            sourceFile: "Casper-Pack"
+            numberOfProducts: contact.numberOfProductsSold,
+            monthlyRevenue: contact.monthlyRevenue,
+            sourceFile: "CasperV2-Pack"
         )
-    }
-}
-
-extension String {
-    var trimmed: Self {
-        trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-    var onlyNumberic: Self {
-        filter("0123456789".contains)
     }
 }

@@ -1,17 +1,5 @@
 import Foundation
 
-public struct CasperContact {
-    public var phone: String
-    public var sellerPage: String
-    public var storeName: String
-    public var businessName: String
-    public var represantativeName: String
-    public var address: String
-    public var country: String
-    public var email: String
-    public var numberOfReviews: String
-}
-
 public struct HubspotContact: Hashable {
     public struct Address: Hashable {
         public var streetAddress: String
@@ -46,6 +34,8 @@ public struct HubspotContact: Hashable {
     public var address: Address
     public var email: String
     public var numberOfReviews: String
+    public var numberOfProducts: String
+    public var monthlyRevenue: String
     public var sourceFile: String
 }
 

@@ -9,8 +9,8 @@ public class AddressMapper {
         case notSupportedFormat
     }
     
-    public func process(address: String) throws -> HubspotContact.Address {
-        var splitted = address.split(separator: "|").map { String($0) }
+    public func process(address: String, separator: String.Element = "\n") throws -> HubspotContact.Address {
+        var splitted = address.split(separator: separator).map { String($0) }
         
         guard !splitted.isEmpty
         else { throw Failure.empty }
@@ -79,7 +79,7 @@ public class AddressMapper {
             }
         }
         
-        if isHouseNumber(string: streetAddress) {
+        if !splitted.isEmpty && isHouseNumber(string: streetAddress) {
             streetAddress = "\(splitted.remove(at: 0)) \(streetAddress)"
         }
         
@@ -139,11 +139,11 @@ public class AddressMapper {
             "Ober­österreich",
             "Kärnten",
             "Nieder­österreich",
-            "Salzburg",
             "Steier­mark",
             "Tirol",
             "Vorarl­berg"
         ], cityStates: [
+            "Salzburg",
             "Wien"
         ])
     }

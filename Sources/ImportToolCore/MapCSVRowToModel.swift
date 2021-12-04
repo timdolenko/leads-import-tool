@@ -1,5 +1,27 @@
 import Foundation
 
+public func mapRowToCasperV2Contact(row: [String]) -> CasperContact_v2 {
+    CasperContact_v2(
+        sellerPage: row[0],
+        businessName: row[1],
+        represantativeName: row[2],
+        businessAddress: row[3],
+        country: row[4],
+        zip: row[5],
+        state: row[6],
+        city: row[7],
+        streetAddress: row[8],
+        storeName: row[9],
+        email: row[10],
+        phone: row[11],
+        starRating: row[12],
+        percentagePositiveScore: row[13],
+        numberOfReviews: row[17],
+        numberOfProductsSold: row[18],
+        monthlyRevenue: row[20]
+    )
+}
+
 public func mapRowToCasperContact(row: [String]) -> CasperContact {
     CasperContact(
         phone: row[6],
@@ -36,6 +58,8 @@ public func mapHubspotRowToHubspotContact(row: [String], line: Int) -> HubspotCo
         ),
         email: row[3],
         numberOfReviews: row[17],
+        numberOfProducts: "",
+        monthlyRevenue: "",
         sourceFile: "hubspot-all #\(line)"
     )
 }
@@ -62,6 +86,8 @@ public func map500RowToHubspotContact(row: [String], filename: String, line: Int
         ),
         email: row[9],
         numberOfReviews: row[24],
+        numberOfProducts: row[11],
+        monthlyRevenue: "",
         sourceFile: filename + " #\(line)"
     )
 }

@@ -19,6 +19,8 @@ extension HubspotContact {
             address: .init(streetAddress: "", zipCode: "", city: "", country: ""),
             email: "",
             numberOfReviews: "",
+            numberOfProducts: "",
+            monthlyRevenue: "",
             sourceFile: ""
         )
     }

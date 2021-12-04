@@ -177,7 +177,8 @@ public class NameMapper {
         let blackList = [
             "&",
             "/",
-            "+"
+            "+",
+            ";"
         ]
         
         for word in blackList {
